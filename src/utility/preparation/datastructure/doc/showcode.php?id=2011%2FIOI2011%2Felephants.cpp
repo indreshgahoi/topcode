@@ -1,0 +1,486 @@
+<html>
+	<head>
+		<title>
+			builtinclz
+		</title>
+	</head>
+	<body background="img/skbg.png">
+		<div align="center">
+		<table cellspacing="0" cellpadding="0" border="0" width=600>
+			<tr>
+				<td width=8 height=8 background="img/tab1_l1.png">
+				</td>
+				<td height=8 background="img/tab1_u.png">
+				</td>
+				<td width=8 height=8 background="img/tab1_r1.png">
+				</td>
+			</tr>
+			<tr>
+				<td width=8 background="img/tab1_l2.png">
+				</td>
+				<td background="img/tab1_m.png" align="center">
+语法加亮是天下最邪恶的一些东西——我放弃！
+				</td>
+				<td width=8 background="img/tab1_r2.png">
+				</td>
+			</tr>
+			<tr>
+				<td width=8 height=8 background="img/tab1_l3.png">
+				</td>
+				<td height=8 background="img/tab1_d.png">
+				</td>
+				<td width=8 height=8 background="img/tab1_r3.png">
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table cellpadding=0 cellspacing=0 border=0>
+			<tr>
+				<td width=600 height=20 bgcolor="#ffff00">
+				<p onclick="history.back()" style="display:inline"><font color="#0000ff"><b>&lt;&lt;返回</b></font></p>
+				&nbsp;&nbsp;&nbsp;
+				<a href="index.html"><font color="#0000ff"><b>首页</b></font></a>
+				</td>
+			<tr>
+				<td width=600 height=400 background="img/tab2_m.png" valign="top">
+#include&nbsp;"elephants.h"
+<br>
+#include&nbsp;&lt;algorithm&gt;
+<br>
+#include&nbsp;&lt;cstdio&gt;
+<br>
+#include&nbsp;&lt;set&gt;
+<br>
+
+<br>
+using&nbsp;namespace&nbsp;std;
+<br>
+
+<br>
+namespace&nbsp;FHQ{
+<br>
+const&nbsp;int&nbsp;NMax=150000;
+<br>
+int&nbsp;N,L;
+<br>
+int&nbsp;A[NMax];
+<br>
+int&nbsp;ori[NMax];
+<br>
+void&nbsp;init(int&nbsp;n,int&nbsp;l,int&nbsp;x[]){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;N=n;L=l;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(int&nbsp;i=0;i&lt;N;i++)ori[i]=A[i]=x[i];
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sort(A,A+N);
+<br>
+}
+<br>
+int&nbsp;update(int&nbsp;a,int&nbsp;y){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;l=0,r=N-1;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(l!=r){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;m=(l+r)&gt;&gt;1;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(A[m]==ori[a])l=r=m;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;(A[m]&lt;ori[a])l=m+1;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;r=m-1;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ori[a]=y;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a=l;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(A[a]&gt;y){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;i=a;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(i&gt;0&nbsp;&#38;&#38;&nbsp;A[i-1]&gt;y)A[i]=A[i-1],i--;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A[i]=y;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}else{
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;i=a;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(i&lt;N-1&nbsp;&#38;&#38;&nbsp;A[i+1]&lt;y)A[i]=A[i+1],i++;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A[i]=y;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;ret=0;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(int&nbsp;i=0;i&lt;N;i++){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;j=i;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(j+1&lt;N&nbsp;&#38;&#38;&nbsp;A[j+1]&lt;=A[i]+L)j++;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ret++;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i=j;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;ret;
+<br>
+}
+<br>
+}
+<br>
+namespace&nbsp;FHQ2{
+<br>
+const&nbsp;int&nbsp;NMax=150000;
+<br>
+int&nbsp;N,L;
+<br>
+struct&nbsp;node{
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;c,s;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;*l,*r,*p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;update(){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s=c;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(l)s+=l-&gt;s;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(r)s+=r-&gt;s;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool&nbsp;isroot(){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;!p&nbsp;||&nbsp;(p-&gt;l!=this&nbsp;&#38;&#38;&nbsp;p-&gt;r!=this);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;static&nbsp;node*&nbsp;getnew(int&nbsp;c){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;*p=new&nbsp;node;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p-&gt;c=p-&gt;s=c;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p-&gt;l=p-&gt;r=p-&gt;p=NULL;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+};
+<br>
+void&nbsp;zig(node&nbsp;*p){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;*q=p-&gt;p,*r=q-&gt;p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((q-&gt;l=p-&gt;r))q-&gt;l-&gt;p=q;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p-&gt;r=q;q-&gt;p=p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((p-&gt;p=r)){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(r-&gt;l==q)r-&gt;l=p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;(r-&gt;r==q)r-&gt;r=p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;q-&gt;update();
+<br>
+}
+<br>
+void&nbsp;zag(node&nbsp;*p){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;*q=p-&gt;p,*r=q-&gt;p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((q-&gt;r=p-&gt;l))q-&gt;r-&gt;p=q;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p-&gt;l=q;q-&gt;p=p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((p-&gt;p=r)){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(r-&gt;l==q)r-&gt;l=p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if&nbsp;(r-&gt;r==q)r-&gt;r=p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;q-&gt;update();
+<br>
+}
+<br>
+void&nbsp;Splay(node&nbsp;*p){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(!p-&gt;isroot()){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;*q=p-&gt;p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(q-&gt;isroot()){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(q-&gt;l==p)zig(p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;zag(p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;*r=q-&gt;p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(r-&gt;l==q){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(q-&gt;l==p)zig(q),zig(p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;zag(p),zig(p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}else{
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(q-&gt;r==p)zag(q),zag(p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;zig(p),zag(p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p-&gt;update();
+<br>
+}
+<br>
+node&nbsp;*Expose(node&nbsp;*p){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;*r=NULL;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(;p;p=p-&gt;p){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splay(p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;p-&gt;r=r;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(r=p)-&gt;update();
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;r;
+<br>
+}
+<br>
+node&nbsp;*&nbsp;A[NMax];
+<br>
+int&nbsp;ori[NMax];
+<br>
+multiset&lt;pair&lt;int,int&gt;&nbsp;&gt;&nbsp;T2;
+<br>
+struct&nbsp;cmp1{
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool&nbsp;operator()(const&nbsp;pair&lt;int,node*&gt;&nbsp;&#38;a,const&nbsp;pair&lt;int,node*&gt;&nbsp;&#38;b){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;a.first&lt;b.first;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+};
+<br>
+multiset&lt;pair&lt;int,node*&gt;&nbsp;&gt;&nbsp;T1;
+<br>
+node*&nbsp;createnode(int&nbsp;x,int&nbsp;c){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//printf("createnode&nbsp;%d&nbsp;%d&nbsp;",x,c);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;*p=node::getnew(c);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;__typeof(T1.insert(make_pair(x,p)))&nbsp;tmp=T1.insert(make_pair(x,p));
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;__typeof(T1.begin())&nbsp;it=tmp,it2;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(c==0)it2=it,it2++;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;it2=T1.lower_bound(make_pair(x+L+1,(node*)NULL));
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(it2!=T1.end())p-&gt;p=it2-&gt;second;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(it!=T1.begin()){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it2=it;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it2--;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node&nbsp;*q=it2-&gt;second;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(q-&gt;c==0){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Expose(q);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Splay(q);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(q-&gt;l)q-&gt;l-&gt;p=q-&gt;p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q-&gt;l=NULL;q-&gt;update();
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q-&gt;p=p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//printf("%p\n",p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;p;
+<br>
+}
+<br>
+void&nbsp;changecolor(int&nbsp;x,node&nbsp;*p){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//printf("changecolor&nbsp;%d&nbsp;%p\n",x,p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Expose(p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Splay(p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(p-&gt;l)p-&gt;l-&gt;p=p-&gt;p;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;p-&gt;c=0;p-&gt;l=NULL;p-&gt;update();
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;__typeof(T1.begin())&nbsp;it=T1.upper_bound(make_pair(x,p));
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(it!=T1.end())p-&gt;p=it-&gt;second;
+<br>
+}
+<br>
+//void&nbsp;show(node&nbsp;*p){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//if&nbsp;(p){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//show(p-&gt;l);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//printf("(%d&nbsp;%d&nbsp;%p)",p-&gt;c,p-&gt;s,p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//show(p-&gt;r);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//}
+<br>
+//}
+<br>
+//void&nbsp;show(){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//puts("T1");
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//for&nbsp;(__typeof(T1.begin())&nbsp;i=T1.begin();i!=T1.end();i++){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//printf("(%d&nbsp;%d&nbsp;%p)\n",i-&gt;first,i-&gt;second-&gt;c,i-&gt;second);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//if&nbsp;(i-&gt;second-&gt;isroot()){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//printf("list:");
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//show(i-&gt;second);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//printf("&nbsp;father=%p\n",i-&gt;second-&gt;p);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//}
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//}
+<br>
+//}
+<br>
+void&nbsp;init(int&nbsp;n,int&nbsp;l,int&nbsp;X[]){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;T1.clear();T2.clear();
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;N=n;L=l;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(int&nbsp;i=0;i&lt;N;i++){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ori[i]=X[i];
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;createnode(X[i]+L+1,0);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A[i]=createnode(X[i],1);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T2.insert(make_pair(X[i],i));
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}
+<br>
+}
+<br>
+int&nbsp;update(int&nbsp;a,int&nbsp;y){
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;changecolor(ori[a],A[a]);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;T2.erase(make_pair(ori[a],a));
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ori[a]=y;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;T2.insert(make_pair(ori[a],a));
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;createnode(y+L+1,0);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A[a]=createnode(y,1);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;b=T2.begin()-&gt;second;
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//printf("b=%d\n",b);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Expose(A[b]);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Splay(A[b]);
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;//show();
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;A[b]-&gt;s;
+<br>
+}
+<br>
+}
+<br>
+void&nbsp;init(int&nbsp;N,&nbsp;int&nbsp;L,&nbsp;int&nbsp;X[])
+<br>
+{
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;FHQ2::init(N,L,X);
+<br>
+}
+<br>
+
+<br>
+int&nbsp;update(int&nbsp;i,&nbsp;int&nbsp;y)
+<br>
+{
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;FHQ2::update(i,y);
+<br>
+}
+<br>
+<br>
+				</td>
+			</tr>
+		</table>
+	</div>
+	</body>
+</html>
+<!-- Begin Free Hosting HOST1FREE Counter Code by HOST1PLUS -->
+
+        <script type='text/javascript'>      
+                var _gaq = _gaq || [];  
+                _gaq.push(['_setAccount', 'UA-7382389-46']);          
+                _gaq.push(['_trackPageview']);          
+
+                (function() {  
+                        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';    
+                        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);    
+                })();  
+        </script>
+<noscript>
+<a href="http://www.host1free.com" title="www.host1free.com">www.host1free.com</a>
+<a href="http://www.host1plus.com" title="www.host1plus.com">www.host1plus.com</a>
+</noscript>
+<!-- End Free Hosting HOST1FREE Counter Code by HOST1PLUS -->
