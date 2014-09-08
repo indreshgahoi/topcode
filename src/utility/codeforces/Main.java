@@ -62,7 +62,7 @@ class InputReader {
 	
 	BufferedReader br;
 	StringTokenizer st;
-	static InputReader input;
+	private static InputReader input;
 	
 	private InputReader(InputStream stream){
 		br=new BufferedReader(new InputStreamReader(stream));
@@ -92,7 +92,7 @@ class InputReader {
 				st=new StringTokenizer(line);
 			 } 
 			  catch (IOException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			   }

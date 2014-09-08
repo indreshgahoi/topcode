@@ -75,6 +75,10 @@ public class VectorTest extends JFrame
 		
 		
 	 Graphics2D g2=(Graphics2D) g;	
+	 double w = getWidth();
+	 double h = getHeight() ;
+	 int x = getX();
+	 int y = getY();
 	 float red=155/255;
 	 float green=100/255;
 	 float blue=80/255;

@@ -1,3 +1,5 @@
+package utility.io;
+
 import java.io.Console;
 import java.util.Arrays;
 import java.io.IOException;

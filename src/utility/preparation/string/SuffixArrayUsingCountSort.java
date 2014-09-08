@@ -2,7 +2,6 @@ package utility.preparation.string;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
 import utility.DebugUtility;
 
 
@@ -27,9 +26,6 @@ public SuffixArrayUsingCountSort(String str){
 		permutation[i]=i;
 		bucket[permutation[i]]=str.charAt(i)-'a';
     }
-	
-	
-	
 }
 
 void updateBucket(){

@@ -218,9 +218,11 @@ class BinaryIndexTree{
 		}
 		return sum;
 	}
-	  public Integer rangeQuery(Integer a,Integer b) {
+	
+	public Integer rangeQuery(Integer a,Integer b) {
 		return sum(b)-sum(a-1);
-		}
+	
+	}
 	public Integer readAt(int idx){
 		Integer value=ftree[idx];
 		//find predecessor of idx

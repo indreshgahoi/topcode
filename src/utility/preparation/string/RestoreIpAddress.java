@@ -13,7 +13,8 @@ public class RestoreIpAddress {
     		 String t=new String(str, start, end-start+1);
             Integer num=0;
             num=Integer.parseInt(t);
-    		if( num<=255 ){
+    		if( num<=255 )
+    		{
                 String ts=res+num.toString();
                 if((ts.length()-3)==str.length)
     			list.add(ts);

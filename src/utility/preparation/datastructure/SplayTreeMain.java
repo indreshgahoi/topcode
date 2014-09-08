@@ -314,7 +314,8 @@ class Node{
 		
 	}
 	
-	Node minimum(Node tree){
+	Node minimum(Node tree)
+	{
 		while(tree.left!=null)
 			tree=tree.left;
 		return tree;
@@ -378,7 +379,10 @@ class Node{
 	     curr.setSize();
 	     return new SplayTree(front);
 	}
-  Node build(int l, int r){
+ 
+	
+	Node build(int l, int r)
+	{
 	  if(l>r)
 		  return null;
 	  int m=(l+r)>>1;
@@ -419,12 +423,14 @@ class Node{
 
 }
 
-class InputReader {
+class InputReader 
+{
 	BufferedReader br;
 	StringTokenizer st;
-	static InputReader input;
+	static InputReader input ;
 	
-	private InputReader(InputStream stream){
+	private InputReader(InputStream stream)
+	{
 		br=new BufferedReader(new InputStreamReader(stream));
 		input=this;
 		st=null;
