@@ -33,7 +33,7 @@
  * for use in the design, construction, operation or maintenance of any
  * nuclear facility.
  */
-
+package utility.SortDemo;
 /*
  * @(#)QSortAlgorithm.java	1.13 06/02/22
  */

@@ -186,8 +186,7 @@ class Node{
 		x.setSize();
 		y.setSize();
 		if(y.parent!=null)y.parent.setSize();
-		
-	 }
+	}
 	
 	void rightRotate(Node x){
 		Node y=x.left;

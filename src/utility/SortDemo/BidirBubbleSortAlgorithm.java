@@ -1,3 +1,5 @@
+package utility.SortDemo;
+
 /*
  * @(#)BidirBubbleSortAlgorithm.java	1.13 06/02/22
  * 

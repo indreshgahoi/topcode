@@ -1,3 +1,6 @@
+
+package utility.SortDemo;
+
 class InsertionSortAlgorithm extends SortAlgorithm {
     void sort(int a[]) throws Exception {
 	for (int j = 1;j<a.length;j++ ) {
