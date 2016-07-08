@@ -20,6 +20,10 @@ class MinmumSortedRotatedArray {
        }
        return num[l] ;
     }
+	public static void main(String[] args) {
+		System.out.println("MinmumSortedRotatedArray");
+
+	}
 }
 class MinmumSortedRotatedArrayDuplicate {
 
@@ -33,13 +37,23 @@ class MinmumSortedRotatedArrayDuplicate {
     	   if(num[l] < num[r]) return num[l] ;
     	   else if(mid>0 && num[mid-1]>num[mid] ) return num[mid] ;
     	   else if(mid < num.length-1 && num[mid+1] < num[mid]) return num[mid+1] ;
-    	   if(num[l] <= num[mid]){
-    		   l = mid ;
-    	   }else if(num[mid] <= num[r] ){
-    		   r = mid ;
+    	   if(num[l] == num[mid]){
+    		   l++ ;
+    		   
+    		   continue ;
     	   }
+    	   if(num[l] < num[mid]){
+    		   l = mid + 1 ;
+    	   }else {
+    		   r = mid - 1 ;
+    	   }
+    	   //System.out.println("l:"+ l + " r:"+r);
        }
-       if(l==r) return num[l] ;
-       else return Math.min(num[l], num[r]);
+       return num[l] ; 
     }
+	public static void main(String[] args) {
+		int [] nums = new int[]{5,5,7,7} ;
+		int minValue = new MinmumSortedRotatedArrayDuplicate().findMin(nums);
+		System.out.println(" min value "+ minValue);
+	}
 }
