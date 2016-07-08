@@ -1,0 +1,42 @@
+0 abaab
+2 aab
+3 ab
+1 baab
+4 b
+
+
+ i=0  i=1  i=2  i=3  i=4 
+ [0]  [1]  [0]  [0]  [1] 
+2 aab
+0 abaab
+3 ab
+1 baab
+4 b
+
+
+ i=0  i=1  i=2  i=3  i=4 
+ [1]  [2]  [0]  [1]  [2] 
+2 aab
+0 abaab
+3 ab
+4 b
+1 baab
+
+
+ i=0  i=1  i=2  i=3  i=4 
+ [1]  [3]  [0]  [1]  [2] 
+2 aab
+3 ab
+0 abaab
+4 b
+1 baab
+
+
+ i=0  i=1  i=2  i=3  i=4 
+ [2]  [4]  [0]  [1]  [3] 
+2 aab
+3 ab
+0 abaab
+4 b
+1 baab
+

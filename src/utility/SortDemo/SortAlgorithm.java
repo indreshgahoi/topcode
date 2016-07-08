@@ -45,7 +45,7 @@
  * @author James Gosling
  * @version 	1.6f, 31 Jan 1995
  */
-
+package utility.SortDemo;
 class SortAlgorithm {
     /**
      * The sort item.

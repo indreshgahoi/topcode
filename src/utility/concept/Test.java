@@ -7,7 +7,7 @@ public class Test {
 	 * @param args
 	 */
 	
-	public void stringTest()
+	public static void stringTest()
 	{
 		 String str1 = "ABC" ;
 		 String str2 ="ABC" ;
@@ -26,9 +26,11 @@ public class Test {
 		
 		 A a1 = new A();
 		 A a2 = new B() ;
+		
 	
 	    a1.add(3, 7);
 	    a2.add(3, 7);
+	    stringTest();
 	
 	}
 }

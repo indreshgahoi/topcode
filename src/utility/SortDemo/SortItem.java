@@ -37,7 +37,7 @@
 /*
  * @(#)SortItem.java	1.20 06/02/22
  */
-
+package utility.SortDemo;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.InputStream;

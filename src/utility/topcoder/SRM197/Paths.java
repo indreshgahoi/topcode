@@ -42,7 +42,7 @@ public class Paths
 		LinkedList<State> Q = new LinkedList<State>() ;
 		Q.add(new State(from, 0)) ;
 		
-		
+		return 0;
 	}
 	
 	public static void main(String[] args)

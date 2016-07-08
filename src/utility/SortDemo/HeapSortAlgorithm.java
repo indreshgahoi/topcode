@@ -1,4 +1,7 @@
- class HeapSortAlgorithm extends SortAlgorithm
+
+package utility.SortDemo;
+
+class HeapSortAlgorithm extends SortAlgorithm
 {
  int heapSize;
  int largest;

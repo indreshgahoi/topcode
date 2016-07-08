@@ -1,5 +1,9 @@
 package utility.thread;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.LinkedHashMap;
+
 /* Condition For DeadLock
  *  1 => Mutual Exclusion
  *  2 => Non - premption

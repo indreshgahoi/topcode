@@ -1,3 +1,5 @@
+package utility.applet;
+
 import java.awt.*;
 import java.applet.*;
 /*<applet  code ="MyApplet"height=200 width=200>

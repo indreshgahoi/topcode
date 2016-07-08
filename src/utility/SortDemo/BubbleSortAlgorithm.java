@@ -37,7 +37,7 @@
 /*
  * @(#)BubbleSortAlgorithm.java	1.13 06/02/22
  */
-
+package utility.SortDemo;
 /**
  * A bubble sort demonstration algorithm
  * SortAlgorithm.java, Thu Oct 27 10:32:35 1994
