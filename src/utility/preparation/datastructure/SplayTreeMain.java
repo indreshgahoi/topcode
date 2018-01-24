@@ -184,20 +184,12 @@ class SplayTree {
 		x.parent = y;
 		x.setSize();
 		y.setSize();
-<<<<<<< HEAD
-		if (y.parent != null) y.parent.setSize();
 
-	}
-
-	void rightRotate(Node x) {
-		Node y = x.left;
-=======
 		if(y.parent!=null)y.parent.setSize();
 	}
 	
 	void rightRotate(Node x){
 		Node y=x.left;
->>>>>>> 8990bb31db1311acf972d2f83d4d23b041b7afab
 		resolve(x.parent);
 		resolve(x);
 		resolve(y);

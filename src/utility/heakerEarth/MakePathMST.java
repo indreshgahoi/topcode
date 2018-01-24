@@ -3,8 +3,10 @@ package utility.heakerEarth;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 
 class MakePathMST {
 
@@ -56,11 +58,10 @@ class MakePathMST {
 	private static int parent[];
 	private static int rank[];
 	private static  final int findSet(int u) {
-		while (parent[u] != u){
-		 	parent[u] = parent[parent[u]];
-		 	u = parent[u] ;
-		}
-		return u;
+	    if(u != parent[u]){
+	    	parent[u] = findSet(parent[u]);
+	    }
+		return parent[u];
 	}
 
 	private static final void unionSet(int x, int y) {
@@ -81,7 +82,7 @@ class MakePathMST {
 	public static void main(String[] args) throws IOException {
 		int N = Integer.parseInt(br.readLine());
 		Point points[] = new Point[N];
-		Edge edages[] = new Edge[N + N];
+		ArrayList<Edge> edages = new ArrayList<>(N + N);
 		parent = new int[N];
 		rank = new int[N];
 		for (int i = 0; i < N; ++i) {
@@ -96,30 +97,34 @@ class MakePathMST {
 
 		Arrays.sort(points, 0, N, xComp);
 		for (int i = 1; i < N; ++i) {
-			edages[e++] = new Edge(points[i - 1].id, points[i].id, points[i].x
-					- points[i - 1].x);
+			edages.add( new Edge(points[i - 1].id, points[i].id, points[i].x
+					- points[i - 1].x));
 		}
 		Arrays.sort(points, 0, N, yComp);
 		for (int i = 1; i < N; ++i) {
-			edages[e++] = new Edge(points[i - 1].id, points[i].id, points[i].y
-					- points[i - 1].y);
+			edages.add(new Edge(points[i - 1].id, points[i].id, points[i].y
+					- points[i - 1].y));
 		}
-		Arrays.sort(edages, 0, e);
+		PriorityQueue<Edge> pq = new PriorityQueue<>(edages);
+		
 		
 		long cost = 0;
 		int edgCount = 0;
-		for (int i = 0; i < e; ++i) {
-			Edge ed = edages[i];
-
-			if (findSet(ed.u) != findSet(ed.v)) {
+		int treeEdge = N -1 ;
+		while(!pq.isEmpty()){
+			Edge ed = pq.poll();
+            int u = findSet(ed.u);
+            int v = findSet(ed.v);
+			if ( u != v) {
 				cost += ed.cost;
 				edgCount++;
-				if (edgCount == (N - 1))
+				if (edgCount == treeEdge)
 					break;
 				unionSet(ed.u, ed.v);
 
 			}
 		}
+		
 
 		System.out.println(cost);
 
