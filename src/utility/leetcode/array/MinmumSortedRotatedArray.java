@@ -23,7 +23,6 @@ class MinmumSortedRotatedArray {
 }
 class MinmumSortedRotatedArrayDuplicate {
 
-	
 	public int findMin(int[] num) {
        int l = 0 ;
        int r = num.length-1;
