@@ -1,10 +1,7 @@
 package utility.topcoder.SRM197;
 
-import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import java.math.*;
-import java.awt.geom.*;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 public class GeneralChess {
 	class Pair implements Comparable<Pair> {
@@ -40,7 +37,7 @@ public class GeneralChess {
 		}
 
 		@Override
-		public int compareTo(Pair o) {
+		public int compareTo(final Pair o) {
 			if(this.x != o.x){
 				return this.x - o.x ;
 			}

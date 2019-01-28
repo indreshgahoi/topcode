@@ -1,11 +1,5 @@
 package utility.topcoder.SRM473;
 
-import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import java.math.*;
-import java.awt.geom.*;
-
 public class RightTriangle
 {
 	boolean isred[] ;
