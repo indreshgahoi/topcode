@@ -1,10 +1,6 @@
 package utility.topcoder.SRM197;
 
-import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import java.math.*;
-import java.awt.geom.*;
+import java.util.LinkedList;
 
 public class Paths
 {
